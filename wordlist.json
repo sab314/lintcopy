@@ -1,0 +1,16 @@
+{
+    "_meta": {
+      "description": "This word list is used by the Figma plugin to detect and replace terms.",
+      "note": "List plural forms before singular forms to avoid double-counting."
+    },
+    "utilize": "use",
+    "leverage": "take advantage of",
+    "prioritize": "focus on",
+    "synergy": "collaboration",
+    "reason why": "reason",
+    "talents": "talent",
+    "skill tests": "skills tests",
+    "skill test": "skills test",  
+    "you are": "you're",
+    "we are": "we're"
+}
