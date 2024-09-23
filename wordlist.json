@@ -1,18 +1,20 @@
-{
+c{
     "_meta": {
       "description": "This word list is used by the Figma plugin to detect and replace terms.",
       "note": "List plural forms before singular forms to avoid double-counting."
     },
-    "in order to": "to",
+    "in order to": "Replace with 'to'.",
+    "let us": "Use 'let's' for our voice and tone.",
     "leverage": "take advantage of",
-    "prioritize": "focus on",
-    "reason why": "reason",
+    "prioritize": "Replace with 'focus on'.",
+    "reason why": "Replace with reason",
     "skill tests": "skills tests",
     "skill test": "skills test", 
+    "so": "Delete. Intensifiers add little meaning.",
     "synergy": "collaboration",
     "talents": "talent",
-    "utilize": "use",
+    "utilize": "Replace with 'use'.",
     "very": "Delete. Intensifiers add little meaning.",
-    "you are": "you're",
+    "you are": "Use 'you're' for our voice and tone.",
     "we are": "we're"
 }
