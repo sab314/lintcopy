@@ -3,6 +3,7 @@
       "description": "This word list is used by the Figma plugin to detect and replace terms.",
       "note": "List plural forms before singular forms to avoid double-counting."
     },
+    "candidates": "Check usage. Candidate refers to people a customer invited to an assessment. For self-initiated testing, use 'job seeker'.",
     "candidate": "Check usage. Candidate refers to people a customer invited to an assessment. For self-initiated testing, use 'job seeker'.",
     "in order to": "Replace with 'to'.",
     "let us": "Use 'let's' for our voice and tone.",
