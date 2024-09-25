@@ -3,18 +3,24 @@
       "description": "This word list is used by the Figma plugin to detect and replace terms.",
       "note": "List plural forms before singular forms to avoid double-counting."
     },
+    "candidate": "Check usage. Candidate refers to people a customer invited to an assessment. For self-initiated testing, use 'job seeker'.",
     "in order to": "Replace with 'to'.",
     "let us": "Use 'let's' for our voice and tone.",
-    "leverage": "take advantage of",
+    "leverage": "Replace with 'take advantage of'.",
+    "oops": "Delete. Never use oops.",
     "prioritize": "Replace with 'focus on'.",
-    "reason why": "Replace with reason",
-    "skill tests": "skills tests",
-    "skill test": "skills test", 
+    "reason why": "Replace with 'reason'.",
+    "screening company": "Use 'hiring company' for consistency with product terminology.",
+    "skill tests": "Use 'skills tests' for consistency with product terminology.",
+    "skill test": "Use 'skills test' for consistency with product terminology.", 
     "so": "Delete. Intensifiers add little meaning.",
-    "synergy": "collaboration",
-    "talents": "talent",
+    "sorry": "Use with caution. Only apologize if we're at fault for a poor experience.",
+    "synergy": "Replace with 'collaboration'.",
+    "talents": "Use 'talent' when referring to people.",
     "utilize": "Replace with 'use'.",
     "very": "Delete. Intensifiers add little meaning.",
-    "you are": "Use 'you're' for our voice and tone.",
-    "we are": "we're"
+    "we are": "Use 'we're' for our voice and tone.",
+    "whoops": "Delete. Never use whoops.",
+    "you are": "Use 'you're' for our voice and tone."
+    
 }
