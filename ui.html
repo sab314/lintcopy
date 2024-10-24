@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Lint Results</title>
+  <!-- Include Inter font from Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style> 
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    
+    /* styling for run button */
+    #lint-button {
+      background-color: #000000; /* Black background */
+      color: white; /* White text */
+      border: none; /* No border */
+      padding: 10px 15px; /* Make the button bigger with padding */
+      font-size: 16px; /* Increase font size */
+      border-radius: 25px; /* Rounded corners */
+      cursor: pointer; /* Pointer cursor on hover */
+    }
+
+    #lint-results {
+      margin-top: 20px;
+    }
+
+    #lint-count {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    #url-input {
+      width: 100%;
+      padding: 10px;
+      font-size: 14px;
+    }
+
+    #save-url-button {
+      margin-top: 10px;
+      padding: 10px 15px;
+      font-size: 16px;
+      background-color: #000000;
+      color: white;
+      border: none;
+      border-radius: 25px; /* Rounded corners */
+      cursor: pointer;
+    }
+
+    li.layer-name {
+      cursor: pointer;
+      color: #2121f0; /* Link blue */
+      text-decoration: underline;
+    }
+
+    li.layer-name:hover {
+      color: #005599; /* Darker on hover */
+    }
+
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+      margin-bottom: 15px;
+    }
+
+    ul.error-list {
+      margin-left: 20px;
+      list-style-type: circle; /* Use bullets for error items */
+    }
+
+    a.layer-link {
+      color: #2121f0; /* Link blue */
+      text-decoration: underline;
+    }
+
+    a.layer-link:hover {
+      color: #005599; /* Darker on hover */
+    }
+
+    a#support-link:hover {
+      color: #005599;
+    }
+  </style>
+
+</head>
+<body>
+  <h2>Lint copy</h2>
+  <p>This plugin checks text layers against basic rules and a custom word list.</p>
+  
+  <h3>Add word list</h3>
+  <p>Add a <code>wordlist.json</code> file to a public GitHub repo. Enter the raw URL to use the list!</p>
+  <label for="url-input">GitHub URL</label><input type="text" id="url-input" placeholder="https://raw.githubusercontent.com/your-username/your-repo/main/wordlist.json" />
+  <button id="save-url-button">Save URL</button>
+  <h3>Check copy</h3>
+  <p>Select text layers and then check the copy. Issues are returned per layer.</p>
+  <button id="lint-button">Check copy</button>
+  <p id="lint-count"></p>
+  <ul id="lint-results"></ul>
+  
+  <script>
+    const saveUrlButton = document.getElementById('save-url-button');
+    const lintButton = document.getElementById('lint-button');
+    const urlInput = document.getElementById('url-input');
+
+    // Send URL to plugin when 'Save URL' is clicked
+    saveUrlButton.onclick = () => {
+      const url = urlInput.value.trim();
+      parent.postMessage({ pluginMessage: { type: 'save-url', url } }, '*');
+    };
+
+    // Send Lint command when 'Check copy' is clicked
+    lintButton.onclick = () => {
+      parent.postMessage({ pluginMessage: { type: 'lint' } }, '*');
+    };
+
+    // Handle messages from code.ts
+    window.onmessage = event => {
+      const { pluginMessage } = event.data;
+
+      if (pluginMessage.type === 'load-url') {
+        urlInput.value = pluginMessage.url || '';
+      }
+
+      if (pluginMessage.type === 'lint-results') {
+        const resultList = document.getElementById('lint-results');
+        const resultCount = document.getElementById('lint-count');
+        resultList.innerHTML = '';
+        let totalErrors = 0;
+ 
+      // Add lint results to the UI
+      pluginMessage.results.forEach(result => {
+      if (result.errors.length > 0) { // Only process layers that have errors
+      const layerItem = document.createElement('li');
+          
+ //console log for lint send/receive
+ const { pluginMessage } = event.data;
+  if (pluginMessage.type === 'lint-results') {
+    console.log(pluginMessage.results); // To verify received data
+  }
+  
+  // Create a clickable hyperlink for the layer name only
+      const layerLink = document.createElement('a');
+      layerLink.textContent = `Layer: ${result.name}`;
+      layerLink.href = '#'; // Use "#" to avoid actual link navigation
+      layerLink.classList.add('layer-link');
+      layerLink.onclick = (e) => {
+        e.preventDefault(); // Prevent default behavior of link
+        parent.postMessage({ pluginMessage: { type: 'select-layer', id: result.id } }, '*');
+      };
+
+      // Append the hyperlink to the layerItem
+      layerItem.appendChild(layerLink);
+
+      // Create an unordered list to display lint errors for this layer (no hyperlinking)
+      const errorList = document.createElement('ul');
+      errorList.classList.add('error-list');
+
+      // Add the errors for each layer as plain <li> items (no links)
+      result.errors.forEach(error => {
+        const errorItem = document.createElement('li');
+        errorItem.textContent = error;
+        errorList.appendChild(errorItem);
+        totalErrors++;
+      });
+
+      // Append the error list to the layerItem
+      layerItem.appendChild(errorList);
+       // Append the entire layerItem to the result list
+      resultList.appendChild(layerItem);
+    } 
+    });
+
+    // Update total errors message
+    resultCount.textContent = totalErrors > 0 ? `Total issues: ${totalErrors}` : 'No issues found. Yay!';
+
+    // If no issues are found, don't display any layers in the result list
+    if (totalErrors === 0) {
+      resultList.innerHTML = ''; // Clear any leftover layer names
+    }
+    }}
+
+    // Ask the plugin for the saved URL
+    parent.postMessage({ pluginMessage: { type: 'get-url' } }, '*');
+  </script>
+<hr>
+  <p>Need help? <a href="#" id="support-link">Read the documentation</a>.</p>
+  <script>
+    // Handle the support link click
+    const supportLink = document.getElementById('support-link');
+    supportLink.onclick = () => {
+      // Open the external support link directly
+      window.open('https://sites.google.com/view/lintcopy', '_blank');
+    };
+  </script>
+
+</body>
+</html>
