@@ -88,10 +88,16 @@
   <h2>Lint copy</h2>
   <p>This plugin checks text layers against basic rules and a custom word list.</p>
   
-  <h3>Add word list</h3>
-  <p>Add a <code>wordlist.json</code> file to a public GitHub repo. Enter the raw URL to use the list!</p>
-  <label for="url-input">GitHub URL</label><input type="text" id="url-input" placeholder="https://raw.githubusercontent.com/your-username/your-repo/main/wordlist.json" />
-  <button id="save-url-button">Save URL</button>
+  <details>
+    <summary>Add word list</summary>
+    <p>Add a <code>wordlist.json</code> file to a public GitHub repo or public GitLab project. Enter the raw URL to use the list!</p>
+    <label for="url-input">GitHub URL</label>
+    <input type="text" id="url-input" placeholder="https://raw.githubusercontent.com/your-username/your-repo/main/wordlist.json" />
+    
+    <label for="gitlab-url-input" style="margin-top: 10px;">GitLab URL</label>
+    <input type="text" id="gitlab-url-input" placeholder="https://gitlab.com/your-username/your-repo/raw/main/wordlist.json" />
+    <button id="save-url-button">Save URL</button>
+  </details>
   <h3>Check copy</h3>
   <p>Select text layers and then check the copy. Issues are returned per layer.</p>
   <button id="lint-button">Check copy</button>
