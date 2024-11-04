@@ -4,6 +4,7 @@
       "note": "List plural forms before singular forms to avoid double-counting."
     },
     "above": "Directional language is poor for accessibility. Refer to the location of information or controls with 'previous' or 'prior'.",
+    "and/or": "Avoid. Rewrite for clarity.",
     "are you sure": "Delete. It serves no purpose, especially in confirmation modals.",
     "below": "Directional language is poor for accessibility. Refer to the location of information or controls with 'following'.",
     "candidates": "Check usage. Candidate refers to people a customer invited to an assessment. For self-initiated testing, use 'job seeker'.",
